@@ -76,9 +76,9 @@ else
     $new_file_name = "$file_name";
 
 
-    if(move_uploaded_file($file_location, "../master_profile/" . $new_file_name)){
+    if(move_uploaded_file($file_location, "../supervisor_profile/" . $new_file_name)){
                         
-        $sql="UPDATE admin set mail='$m_mail',tel='$m_tel',password='$m_pass',profile='$new_file_name' where user_id='$m_id'";
+        $sql="UPDATE supervisor set mail='$m_mail',tel='$m_tel',password='$m_pass',profile='$new_file_name' where supervisor_id='$m_id'";
 
                 if ($conn->query($sql)===TRUE) 
                 {

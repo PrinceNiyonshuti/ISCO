@@ -142,6 +142,21 @@ if(isset($_SESSION['ISC0_SHIFT_MS_2020_SUPERVISOR']) == false){
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities_5" aria-expanded="true" aria-controls="collapseUtilities_5">
+          <i class="fas fa-fw fa-building"></i>
+          <span>Gate</span>
+        </a>
+        <div id="collapseUtilities_5" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Gate Action :</h6>
+            <a class="collapse-item" href="index.php?add-gate">Add Gate</a>
+            <a class="collapse-item" href="index.php?view-gate">Manage Gate</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities_1" aria-expanded="true" aria-controls="collapseUtilities_1">
           <i class="fas fa-fw fa-building"></i>
           <span>Shift Records</span>
@@ -302,8 +317,33 @@ if(isset($_SESSION['ISC0_SHIFT_MS_2020_SUPERVISOR']) == false){
         include("view_personal_shift_records.php");   
       }
 
-    //********************************************************************
+    elseif(isset($_GET['add-gate']))
+      {           
+        include("new_gate.php");   
+      }
 
+    elseif(isset($_GET['view-gate']))
+      {           
+        include("view_gate.php");   
+      }
+
+    elseif(isset($_GET['gate-assignment']))
+      {           
+        include("assign_gate.php");   
+      }
+
+    //******************************************************************** 
+
+      elseif(isset($_GET['settings']))
+      {           
+        include("settings.php");
+      }
+
+    elseif(isset($_GET['profile']))
+      {           
+        include("profile.php");
+      }
+      
     elseif(isset($_GET[' ']))
       {           
         include(" ");

@@ -164,6 +164,7 @@ function master_profile_update(){
         }; 
 }
 
+
 // supervisor user registration
 
 function register_supervisor(){
@@ -355,4 +356,85 @@ function update_security_shift(){
           
   }; 
           
+}
+
+// gate registration
+
+function register_new_gate(){
+
+  ge('Message2').innerHTML="<div class='alert alert-info' role='alert'><i class='fa fa-info-circle'></i> Creating New Gate </div>";
+
+  var formdata=new FormData();
+  var ajax1=new XMLHttpRequest();
+          
+  var gate_name=ge('gate_name').value;
+  var site_id=ge('site_id').value;
+
+  formdata.append('gate_name',gate_name);
+  formdata.append('site_id',site_id);
+          
+  ajax1.open('POST', 'gate_data/new_gate_save.php');//third argument can be true or false which is optional
+  ajax1.send(formdata);
+          
+  ajax1.onreadystatechange=function(){
+      ge('Message2').innerHTML=ajax1.responseText;
+          
+  }; 
+          
+}
+
+// Gate assign security
+
+function assign_gate_security(){
+
+  ge('Message2').innerHTML="<div class='alert alert-info' role='alert'><i class='fa fa-info-circle'></i> Assigning Gate To Security . . .</div>";
+
+  var formdata=new FormData();
+  var ajax1=new XMLHttpRequest();
+          
+  var gate_id=ge('gate_id').value;
+  var sec_id=ge('sec_id').value;
+
+  formdata.append('gate_id',gate_id);
+  formdata.append('sec_id',sec_id);
+          
+  ajax1.open('POST', 'gate_data/gate_security_assignment.php');//third argument can be true or false which is optional
+  ajax1.send(formdata);
+          
+  ajax1.onreadystatechange=function(){
+      ge('Message2').innerHTML=ajax1.responseText;
+          
+  }; 
+          
+}
+
+ // Master update profile
+
+function master_profile_update(){
+        Ben_way_to_get_element('Message2').innerHTML="<div class='alert alert-info' role='alert'><i class='fa fa-info-circle'></i> Updating Your Profile . . . . </div>";
+      
+        var formdata=new FormData();
+        var ajax1=new XMLHttpRequest();
+
+          var m_id = Ben_way_to_get_element('m_id').value;
+          var m_username = Ben_way_to_get_element('m_username').value;
+          var m_mail = Ben_way_to_get_element('m_mail').value;
+          var m_tel = Ben_way_to_get_element('m_tel').value;
+          var m_pass = Ben_way_to_get_element('m_pass').value;
+          var profile = Ben_way_to_get_element('profile').files[0];
+
+          formdata.append('m_id', m_id);
+          formdata.append('m_username', m_username);
+          formdata.append('m_mail', m_mail);
+          formdata.append('m_tel', m_tel);
+          formdata.append('m_pass', m_pass);
+          formdata.append('profile', profile);
+      
+        ajax1.open('POST', 'supervisor_data/complete_profile_update_data.php'); //third argument can be true or false which is optional
+        ajax1.send(formdata);
+      
+        ajax1.onreadystatechange=function(){
+            Ben_way_to_get_element('Message2').innerHTML=ajax1.responseText;
+      
+        }; 
 }

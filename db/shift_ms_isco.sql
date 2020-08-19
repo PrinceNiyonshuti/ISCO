@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2020 at 02:16 AM
+-- Generation Time: Aug 19, 2020 at 09:08 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -59,6 +59,7 @@ CREATE TABLE `assignment_records` (
   `supervisor_id` int(50) NOT NULL,
   `sec_id` int(50) NOT NULL,
   `shift_id` int(50) NOT NULL,
+  `gate_id` int(50) NOT NULL,
   `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -66,15 +67,17 @@ CREATE TABLE `assignment_records` (
 -- Dumping data for table `assignment_records`
 --
 
-INSERT INTO `assignment_records` (`assing_id`, `site_id`, `supervisor_id`, `sec_id`, `shift_id`, `created_date`) VALUES
-(1, 1, 1, 0, 0, '2020-08-18 08:58:14'),
-(2, 1, 1, 0, 0, '2020-08-18 09:02:47'),
-(3, 1, 1, 0, 0, '2020-08-18 09:14:22'),
-(4, 1, 0, 4, 0, '2020-08-18 10:28:08'),
-(5, 1, 0, 3, 0, '2020-08-18 10:59:04'),
-(6, 1, 0, 4, 0, '2020-08-18 11:11:08'),
-(7, 0, 0, 3, 1, '2020-08-19 12:52:40'),
-(8, 0, 0, 3, 2, '2020-08-19 01:18:14');
+INSERT INTO `assignment_records` (`assing_id`, `site_id`, `supervisor_id`, `sec_id`, `shift_id`, `gate_id`, `created_date`) VALUES
+(1, 1, 1, 0, 0, 0, '2020-08-18 08:58:14'),
+(2, 1, 1, 0, 0, 0, '2020-08-18 09:02:47'),
+(3, 1, 1, 0, 0, 0, '2020-08-18 09:14:22'),
+(4, 1, 0, 4, 0, 0, '2020-08-18 10:28:08'),
+(5, 1, 0, 3, 0, 0, '2020-08-18 10:59:04'),
+(6, 1, 0, 4, 0, 0, '2020-08-18 11:11:08'),
+(7, 0, 0, 3, 1, 0, '2020-08-19 12:52:40'),
+(8, 0, 0, 3, 2, 0, '2020-08-19 01:18:14'),
+(9, 0, 0, 3, 0, 1, '2020-08-19 08:36:10'),
+(10, 0, 0, 3, 0, 1, '2020-08-19 08:40:51');
 
 -- --------------------------------------------------------
 
@@ -124,6 +127,27 @@ INSERT INTO `assignment_supervisor` (`assing_id`, `site_id`, `supervisor_id`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gate`
+--
+
+CREATE TABLE `gate` (
+  `gate_id` int(11) NOT NULL,
+  `gate_name` longtext NOT NULL,
+  `site_id` int(50) NOT NULL,
+  `created_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gate`
+--
+
+INSERT INTO `gate` (`gate_id`, `gate_name`, `site_id`, `created_date`) VALUES
+(1, 'Noth Gate ', 1, '2020-08-19 08:23:23'),
+(2, 'South Gate', 1, '2020-08-19 08:52:01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `security`
 --
 
@@ -137,6 +161,7 @@ CREATE TABLE `security` (
   `sec_email` longtext DEFAULT NULL,
   `site_id` int(11) DEFAULT NULL,
   `shift_id` int(50) DEFAULT NULL,
+  `gate_id` int(50) DEFAULT NULL,
   `profile` varchar(255) DEFAULT NULL,
   `reg_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -145,9 +170,9 @@ CREATE TABLE `security` (
 -- Dumping data for table `security`
 --
 
-INSERT INTO `security` (`sec_id`, `sec_code`, `sec_names`, `sec_gender`, `sec_dob`, `sec_tel`, `sec_email`, `site_id`, `shift_id`, `profile`, `reg_date`) VALUES
-(3, 'ISCO-3272', 'John Doe', 'Male', '1990-06-05', '0780589900', 'johndoe@gmail.com', 1, 2, 'person_1.jpg', '2020-08-18 07:45:50'),
-(4, 'ISCO-7119', 'Ranger Doe', 'Male', '1997-01-28', '0780589950', 'doeranger@gmail.com', NULL, NULL, 'person_3.jpg', '2020-08-18 10:02:14');
+INSERT INTO `security` (`sec_id`, `sec_code`, `sec_names`, `sec_gender`, `sec_dob`, `sec_tel`, `sec_email`, `site_id`, `shift_id`, `gate_id`, `profile`, `reg_date`) VALUES
+(3, 'ISCO-3272', 'John Doe', 'Male', '1990-06-05', '0780589900', 'johndoe@gmail.com', 1, 2, 1, 'person_1.jpg', '2020-08-18 07:45:50'),
+(4, 'ISCO-7119', 'Ranger Doe', 'Male', '1997-01-28', '0780589950', 'doeranger@gmail.com', NULL, NULL, NULL, 'person_3.jpg', '2020-08-18 10:02:14');
 
 -- --------------------------------------------------------
 
@@ -313,6 +338,12 @@ ALTER TABLE `assignment_supervisor`
   ADD PRIMARY KEY (`assing_id`);
 
 --
+-- Indexes for table `gate`
+--
+ALTER TABLE `gate`
+  ADD PRIMARY KEY (`gate_id`);
+
+--
 -- Indexes for table `security`
 --
 ALTER TABLE `security`
@@ -370,7 +401,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `assignment_records`
 --
 ALTER TABLE `assignment_records`
-  MODIFY `assing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `assing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `assignment_security`
@@ -383,6 +414,12 @@ ALTER TABLE `assignment_security`
 --
 ALTER TABLE `assignment_supervisor`
   MODIFY `assing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `gate`
+--
+ALTER TABLE `gate`
+  MODIFY `gate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `security`

@@ -30,7 +30,7 @@
                                                             $m_pass = openssl_decrypt($m_pass, "AES-128-ECB", DONE);
 
                                                         ?>
-                                                        <img class="align-self-center  mr-3" src="master_profile/<?php echo $fileName ?>" id="blah" alt="<?php echo $m_username ?>" width="100%" height="270px">
+                                                        <img class="align-self-center  mr-3" src="supervisor_profile/<?php echo $fileName ?>" id="blah" alt="<?php echo $m_username ?>" width="100%" height="270px">
                                                         <br><br>
                                                         <input type='file' id="profile" name="profile" onchange="readURL(this);" />
                                                     </div>
@@ -40,7 +40,7 @@
 
                                                     <label for="x_card_code" class="control-label mb-1">Username</label>
                                                     <div class="input-group">
-                                                        <input id="m_username" name="m_username" type="text" class="form-control cc-cvc" value="<?php echo $m_username ?>" data-val="true">
+                                                        <label  class="form-control cc-cvc"> <?php echo $m_username ?></label>
                                                     </div>
 
                                                     <label for="x_card_code" class="control-label mb-1">E-mail</label>
